@@ -34,6 +34,6 @@ int main() {
     scanf("%d %d", &num1, &num2);
 
     primeFactors(num1, num2);
-    return 0;
+    return 1;
 
 }
