@@ -2,8 +2,13 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/samuelbagin/Desktop/prac. plocha/school/C/architektura pc/uloha 1'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _toBinary, symObjAddr: 0x0, symBinAddr: 0x100003860, symSize: 0x140 }
-  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _toBinary, symObjAddr: 0x0, symBinAddr: 0x100003860, symSize: 0x140 }
-  - { offsetInCU: 0x9D, offset: 0x9D, size: 0x8, addend: 0x0, symName: _toHex, symObjAddr: 0x140, symBinAddr: 0x1000039A0, symSize: 0x4F0 }
-  - { offsetInCU: 0xF9, offset: 0xF9, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x630, symBinAddr: 0x100003E90, symSize: 0xC4 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _toBinary, symObjAddr: 0x0, symBinAddr: 0x100003528, symSize: 0x140 }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _toBinary, symObjAddr: 0x0, symBinAddr: 0x100003528, symSize: 0x140 }
+  - { offsetInCU: 0x9D, offset: 0x9D, size: 0x8, addend: 0x0, symName: _toHex, symObjAddr: 0x140, symBinAddr: 0x100003668, symSize: 0x4F0 }
+  - { offsetInCU: 0xF9, offset: 0xF9, size: 0x8, addend: 0x0, symName: _fibonacci, symObjAddr: 0x630, symBinAddr: 0x100003B58, symSize: 0xBC }
+  - { offsetInCU: 0x147, offset: 0x147, size: 0x8, addend: 0x0, symName: _faktorial, symObjAddr: 0x6EC, symBinAddr: 0x100003C14, symSize: 0x60 }
+  - { offsetInCU: 0x199, offset: 0x199, size: 0x8, addend: 0x0, symName: _mocnina, symObjAddr: 0x74C, symBinAddr: 0x100003C74, symSize: 0x64 }
+  - { offsetInCU: 0x1F9, offset: 0x1F9, size: 0x8, addend: 0x0, symName: _absolutna, symObjAddr: 0x7B0, symBinAddr: 0x100003CD8, symSize: 0x44 }
+  - { offsetInCU: 0x221, offset: 0x221, size: 0x8, addend: 0x0, symName: _sinus, symObjAddr: 0x7F4, symBinAddr: 0x100003D1C, symSize: 0x100 }
+  - { offsetInCU: 0x281, offset: 0x281, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x8F4, symBinAddr: 0x100003E1C, symSize: 0x110 }
 ...
