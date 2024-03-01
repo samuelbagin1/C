@@ -72,6 +72,9 @@ void toHex(int k) {
     printf("\n");
 }
 
+
+
+
 void fibonacci(int k) {
     int i=1;
     int p=1;
@@ -92,14 +95,14 @@ void fibonacci(int k) {
 
 //taylorov rad sinus
 
-int faktorial(int k) {
-    int sum=1;
+float faktorial(float k) {
 
-    for (int i=k; i>1; i--) {
-        sum*=i;
+    if (k<=1.0) {
+        return 1.0;
+    } else {
+        return k*faktorial(k-1.0);
     }
 
-    return sum;
 }
 
 //x na n-tu
@@ -120,29 +123,96 @@ float absolutna(float x) {
     return x;
 }
 
+float absolut(float x) {
+    if (x<0) {
+        return -x;
+    }
+    
+    return x;
+}
+
+int lessDegree(int degree) {
+    while (degree>=360) {
+        degree -= 360;
+    }
+
+    while (degree<=0) {
+        degree += 360;
+    }
+
+    return degree;
+}
+
 float sinus(float radians, float epsilon) {
-    radians=radians*(3.142/180);
+    radians=lessDegree(radians);
+
+    printf("%f\n", radians);
+    radians=radians*(3.141592653589/180);    //ak je uhol zadany v stupnoch a nie radianoch
     float num=radians;
     float numPred=0;
-    int n=1;
+    float n=1;
 
     while (absolutna(numPred-num)>epsilon) {
         numPred=num;
-        num+=(mocnina(-1, n)*mocnina(radians, 2*n+1))/faktorial(2*n+1);
+        num+=(mocnina(-1, n)*mocnina(radians, 2*n+1))/absolut(faktorial(2*n+1));
 
-        n++;
+        printf("%f,     %f,     %f,       %f\n", num, mocnina(radians, 2*n+1), absolut(faktorial(2*n+1)), n);
+        n+=1.0;
     }
 
     return num;
 }
 
 
+void rimske(int n) {
+    char s[32];
+    int i=0;
+
+    while (n!=0) {
+        if (n>=90) {
+            s[i]='X';
+            s[i+1]='C';
+            n-=90;
+            i+=2;
+        } else if (n>=50) {
+            s[i]='L';
+            n-=50;
+            i++;
+        } else if (n>=10) {
+            s[i]='X';
+            n-=10;
+            i++;
+        } else if (n>=9) {
+            s[i]='I';
+            s[i+1]='X';
+            n-=9;
+            i+=2;
+        } else if (n>=5) {
+            s[i]='V';
+            n-=5;
+            i++;
+        } else if (n>=4) {
+            s[i]='I';
+            s[i+1]='V';
+            n-=4;
+            i+=2;
+        } else if (n>=1) {
+            s[i]='I';
+            n-=1;
+            i++;
+        }
+    }
+
+    for (int j=0; j<i; ++j) {
+        printf("%c", s[j]);
+    }
+}
 
 
 
 
 int main() {
-    int num;
+    int num, u;
     char str;
 
     scanf("%d %c", &num, &str);
@@ -164,7 +234,10 @@ int main() {
     fibonacci(30);
 
     printf("\n");
-    printf("%f", sinus(30, 0.00000001));
+    printf("%f", sinus(-7777, 0.000000001));
+
+    scanf("%d", &u);
+    rimske(u);
 
     return 0;
 }
