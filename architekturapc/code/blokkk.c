@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <windows.h>
 
 int randomChar() {
     return rand() % (122+1-97)+97;
@@ -21,15 +22,17 @@ void meranie() {        //2.6
             if (ch==-59) {      //F1
                 printf("\nukaze sa ti charakter a ty musis za co najkratsi cas stlacit dany charakter\n");
             } else if (ch==-60) {
-                int y=20;
-                int x=20;
 
                 while (ch!=27) {
                     clock_t Start, Koniec;
                     float Trvanie;
                     int i=1;
                     int randmCharr=rand() % (122+1-97)+97;
-                    printf("\033[%d;%dH", y, x);
+                    COORD c;
+                    c.X = 40;
+                    c.Y = 16;
+ 
+                    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 
 
                     printf("stlac: %c ------ X,XX s      stlacene: ", randmCharr);
@@ -43,6 +46,7 @@ void meranie() {        //2.6
                     Koniec = clock();
 
                     Trvanie = (float)(Koniec-Start) / 1000;
+                    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
                     printf("\033[%d;%dHstlac: %c ------ %.2f s", y, x, randmCharr, Trvanie);
                 }
             }
