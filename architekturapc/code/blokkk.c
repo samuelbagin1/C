@@ -48,6 +48,7 @@ void meranie() {        //2.6
                     Trvanie = (float)(Koniec-Start) / 1000;
                     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
                     printf("stlac: %c ------ %.2f s", randmCharr, Trvanie);
+                    c.Y+=1;
                 }
             }
 
