@@ -47,13 +47,14 @@ void meranie() {        //2.6
 
                     Trvanie = (float)(Koniec-Start) / 1000;
                     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
-                    printf("\033[%d;%dHstlac: %c ------ %.2f s", y, x, randmCharr, Trvanie);
+                    printf("stlac: %c ------ %.2f s", randmCharr, Trvanie);
                 }
             }
 
         }
 
         if (ch==27) printf("KONIEC");
+        ch=getch();
     }
 
 
