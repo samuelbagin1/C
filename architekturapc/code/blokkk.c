@@ -13,6 +13,9 @@ void meranie() {        //2.6
     printf("F1: navod | F2: spusti meranie | ESC: program skonci\n\n\n\n");
 
     int ch=0;
+    COORD c;
+    c.X = 40;
+    c.Y = 16;
     while (ch!=27) {
         ch=getch();
 
@@ -28,10 +31,8 @@ void meranie() {        //2.6
                     float Trvanie;
                     int i=1;
                     int randmCharr=rand() % (122+1-97)+97;
-                    COORD c;
-                    c.X = 40;
-                    c.Y = 16;
- 
+
+
                     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 
 
@@ -54,8 +55,11 @@ void meranie() {        //2.6
 
         }
 
-        if (ch==27) printf("KONIEC");
-        ch=getch();
+        if (ch==27) {
+            printf("KONIEC");
+            ch=getch();
+        }
+
     }
 
 
