@@ -19,5 +19,8 @@ int main() {
 
     printf("CPU vendor: %s\n", vendorString);
 
+    int k;
+    scanf("%d", &k);
+
     return 0;
 }
