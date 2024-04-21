@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ncurses.h>
+//#include <conio.h>
+#include <time.h>
+//#include <windows.h>
 
 void pamat() {  //2.2 - 3b
     char s[]="architektura_pocitacov_je_super_predmet"; //1
@@ -49,7 +52,7 @@ void vypis() {  //2.5.1 - 1b
 
 }
 
-void semigrafika() {    //2.5.2
+void semigrafika() {    //2.5.2 - 3b
     char meno[]="Honza Mrkva";
     char tel[]="0803 / 255 34446436753";
     int vyska=180, hmotnost=80, x, y;
@@ -89,7 +92,7 @@ void semigrafika() {    //2.5.2
 
 
 
-void htmlko() {     //2.3.1
+void htmlko() {     //2.3.1 - 2b
         FILE *inputFile, *outputFile;
         char *inputFileName = "inputFile.html";
         char *outputFileName = "output.html";
@@ -129,18 +132,69 @@ void htmlko() {     //2.3.1
 }
 
 
-void meranie() {        //2.6
+//windows kod
+/*
+int randomChar() {
+    return rand() % (122+1-97)+97;
+}
+
+void meranie() {        //2.6 - 4b
     printf("\n\n\n________NAVOD________\n");
     printf("F1: navod | F2: spusti meranie | ESC: program skonci\n\n\n\n");
 
+    int ch=0;
+    COORD c;
+    c.X = 40;
+    c.Y = 16;
+    while (ch!=27) {
+        ch=getch();
 
-    int i=1;
-    while (i==1) {
-        int ch=getch();
-        printf(" %c ", ch);
+        if (ch==0) {
+            ch=-getch();
+
+            if (ch==-59) {      //F1
+                printf("\nukaze sa ti charakter a ty musis za co najkratsi cas stlacit dany charakter\n");
+            } else if (ch==-60) {
+
+                while (ch!=27) {
+                    clock_t Start, Koniec;
+                    float Trvanie;
+                    int i=1;
+                    int randmCharr=rand() % (122+1-97)+97;
+
+
+                    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
+
+
+                    printf("stlac: %c ------ X,XX s      stlacene: ", randmCharr);
+                    Start = clock();
+                    do {
+                        ch=getch();
+                        putchar(ch);
+
+                        if (ch==27 || ch==randmCharr) i=0;
+                    } while (i!=0);
+                    Koniec = clock();
+
+                    Trvanie = (float)(Koniec-Start) / 1000;
+                    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
+                    printf("stlac: %c ------ %.2f s", randmCharr, Trvanie);
+                    c.Y+=1;
+                }
+            }
+
+        }
+
+        if (ch==27) {
+            printf("KONIEC");
+            ch=getch();
+        }
 
     }
-}
+
+
+} */
+
 
 
 //to do
@@ -157,9 +211,10 @@ int main() {
 
     //semigrafika();
 
-    //htmlko();
+    htmlko();
 
-    meranie();
+    //meranie();
+
 
     return 0;
 }

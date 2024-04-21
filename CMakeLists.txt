@@ -15,4 +15,5 @@ add_executable(C
         z2_clion_project/src/z2.c
         hokus.c
         intro.c
-        "zadanie 1.c")
+        "zadanie 1.c"
+        z3.c)
