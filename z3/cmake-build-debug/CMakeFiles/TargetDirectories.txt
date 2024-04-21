@@ -1,0 +1,3 @@
+/Users/samuelbagin/Desktop/prac. plocha/school/C/z3/cmake-build-debug/CMakeFiles/z3.dir
+/Users/samuelbagin/Desktop/prac. plocha/school/C/z3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/samuelbagin/Desktop/prac. plocha/school/C/z3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
