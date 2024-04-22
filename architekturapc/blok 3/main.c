@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <time.h>
 #include <locale.h>
 
 #define SERVER_IP "147.175.115.34"  // server`s IP
@@ -35,16 +34,30 @@ char* primeString(char* buffer) {
     return result;
 }
 
-int writeWholeWord(const char* buff, int i, int xMax) {
-    for (int p=i; p<xMax; p++) {
-        if (buff[p]==' ') { return 1; }
+int writeWholeWord(const char* buff, int i) {
+    for (int p=i+1; p<strlen(buff); p++) {
+        if (buff[p]==' ') { return p-i; }
     }
 
-    return 0;
+    return strlen(buff) - i;
+}
+
+char* stringBuff(char* buff, int i) {
+    char *result = malloc(2056);
+    while (1) {
+        if (buff[i]==' ') { break; } else {
+            result[strlen(result)]=buff[i];
+        }
+        i++;
+    }
+
+    return result;
 }
 
 void sendGet(int sockfd, char *message, int decrypt) {
-    y=y+2;
+    printf("\n");
+    printf("\n");
+    y+=2;
     char buffer[1024] = {0};
     char res[2056];
 
@@ -55,7 +68,8 @@ void sendGet(int sockfd, char *message, int decrypt) {
     int x=1;
     for (int i=0; i<strlen(res); i++) {
         fputc(res[i], outputLog);
-        if (writeWholeWord(message, i, 40)==0 && message[i-1]==' ') {
+        if (writeWholeWord(message, i)+x>40 && message[i-1]==' ') {
+            printf("\n");
             y++;
             x=1;
             printf("\033[%d;%dH%c", y, x, res[i]);
@@ -64,7 +78,7 @@ void sendGet(int sockfd, char *message, int decrypt) {
         }
         fflush(stdout);
         //usleep(20000);
-        if (x<40) { x++; } else { x=1; y++; }
+        if (x<40) { x++; } else { x=1; printf("\n"); y++; }
     }
 
     fputc('\n', outputLog); //novy riadok v subore
@@ -83,7 +97,7 @@ void sendGet(int sockfd, char *message, int decrypt) {
     }else { read(sockfd, buffer, 1024); }
 
     //odstranenie \n
-    int p=0;
+    unsigned long p=0;
     while (buffer[p]!='\n') { p++; }
     if (p>strlen(buffer)) p=strlen(buffer);
     buffer[p]='\0';
@@ -91,18 +105,21 @@ void sendGet(int sockfd, char *message, int decrypt) {
     strcpy(res,"Message from server: ");
     strcat(res, buffer);
     x=40;
+
+
     for (int i=0; i<strlen(res); i++) {
         fputc(res[i], outputLog);   //do txt
-        if (writeWholeWord(buffer, i, 80)==0 && buffer[i-1]==' ') {
+        if (res[i]==' ' && writeWholeWord(res, i)+x+1>80) {
+            printf("\n");
             y++;
-            x=40;
+            x=39;
             printf("\033[%d;%dH%c", y, x, res[i]);
         } else {
             printf("\033[%d;%dH%c", y, x, res[i]);
         }
         fflush(stdout);
         //usleep(20000);
-        if (x<80) { x++; } else { x=40; y++; }
+        if (x<80) { x++; } else { x=40; printf("\n"); y++; }
     }
 
     fputc('\n', outputLog);
@@ -119,13 +136,14 @@ int ID(char* id) {
     }
 
     int digit=id[4] - '0';
+    digit=digit==0 ? 9 : digit; //ak sa piata cislica rovna 0 tak prehodi na 9
     return (sum % digit);
 }
 
 
 
 int main() {
-    setlocale(LC_ALL, "sk_SK");
+    setlocale(LC_CTYPE, "en_US.UTF-8");
     outputLog = fopen(outputFileName, "w");
     int sockfd;
     struct sockaddr_in server_addr;
@@ -202,5 +220,6 @@ int main() {
     //Please disconnect, then reprogram your software to display your name  including diacritics using the function SetConsoleOutputCP(CP_UTF8).  Display messages from me one letter at a time (wait a few milliseconds after each letter).Then reconnect and after reading this message send me the code 844848.
     // Close socket
     close(sockfd);
+    fclose(outputLog);
     return 0;
 }
