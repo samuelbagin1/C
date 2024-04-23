@@ -42,17 +42,7 @@ int writeWholeWord(const char* buff, int i) {
     return strlen(buff) - i;
 }
 
-char* stringBuff(char* buff, int i) {
-    char *result = malloc(2056);
-    while (1) {
-        if (buff[i]==' ') { break; } else {
-            result[strlen(result)]=buff[i];
-        }
-        i++;
-    }
 
-    return result;
-}
 
 void sendGet(int sockfd, char *message, int decrypt) {
     printf("\n");
@@ -66,6 +56,7 @@ void sendGet(int sockfd, char *message, int decrypt) {
     strcpy(res,"Message sent to server: ");
     strcat(res, message);
     int x=1;
+    printf("\033[34m");     //modra farba
     for (int i=0; i<strlen(res); i++) {
         fputc(res[i], outputLog);
         if (writeWholeWord(message, i)+x>40 && message[i-1]==' ') {
@@ -106,7 +97,7 @@ void sendGet(int sockfd, char *message, int decrypt) {
     strcat(res, buffer);
     x=40;
 
-
+    printf("\033[0;32m");   //sets text color to green
     for (int i=0; i<strlen(res); i++) {
         fputc(res[i], outputLog);   //do txt
         if (res[i]==' ' && writeWholeWord(res, i)+x+1>80) {
@@ -149,7 +140,7 @@ int main() {
     struct sockaddr_in server_addr;
     char buffer[1024] = {0};
 
-    printf("\033[0;32m");   //sets text color to green
+
 
     // Create socket
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
