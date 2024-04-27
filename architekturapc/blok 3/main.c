@@ -91,7 +91,7 @@ void sendGet(int sockfd, char *message, int decrypt) {
     unsigned long p=0;
     while (buffer[p]!='\n') { p++; }
     if (p>strlen(buffer)) p=strlen(buffer);
-    buffer[p]='\0';
+    buffer[p]='\0';//
 
 
 
