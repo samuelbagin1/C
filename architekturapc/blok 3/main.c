@@ -93,6 +93,8 @@ void sendGet(int sockfd, char *message, int decrypt) {
     if (p>strlen(buffer)) p=strlen(buffer);
     buffer[p]='\0';
 
+
+
     strcpy(res,"Message from server: ");
     strcat(res, buffer);
     x=40;
@@ -120,7 +122,7 @@ void sendGet(int sockfd, char *message, int decrypt) {
 
 
 
-int ID(char* id) {
+int ID(const char* id) {
     int sum=0;
     for (int i=0; i<4; i++) {
         sum+= id[i] - '0';
@@ -134,11 +136,10 @@ int ID(char* id) {
 
 
 int main() {
-    setlocale(LC_CTYPE, "en_US.UTF-8");
+    setlocale(LC_ALL, "");
     outputLog = fopen(outputFileName, "w");
     int sockfd;
     struct sockaddr_in server_addr;
-    char buffer[1024] = {0};
 
 
 
